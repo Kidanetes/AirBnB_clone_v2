@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
              'max_guest': int, 'price_by_night': int,
              'latitude': float, 'longitude': float
             }
-    orginals = ['id', 'created_at', 'updated_at']
+
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
     def postcmd(self, stop, line):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
-            print('(hbnb) ', end="")
+            print('(hbnb) ', end='')
         return stop
 
     def do_quit(self, command):
@@ -128,42 +128,37 @@ class HBNBCommand(cmd.Cmd):
         kwargs = {}
         while (i < len(line)):
             if '=' not in line[i]:
-                i += 1
-                continue
+                return;
             else:
                 name, value  = line[i].split('=')
-                i = i + 1
                 if name == '' or value == '':
-                    continue
-                if name in HBNBCommand.orginals:
-                    continue
+                    return
+                print(name)
+                print(value)
+                if '\\' in value:
+                    value = value.replace('\\', '').replace("\\", "")
+                    value = value.replace('""', '"').replace("''", "'")
+                else:
+                    value = value.replace('"', '').replace("", "")
+                value = value.replace("_", " ").replace('_', ' ')
+                print(name)
+                print(value)
                 try:
-                    if (name in HBNBCommand.types and
-                        HBNBCommand.types[name] != int):
+                    if 'id' in '{}'.format(name):
                         raise ValueError
                     new_value = int(value)
                 except (ValueError, TypeError):
                     try:
-                        if (name in HBNBCommand.types and
-                            HBNBCommand.types[name] != float):
-                            raise ValueError    
+                        if 'id' in '{}'.format(name):
+                            raise ValueError
                         new_value = float(value)
                     except (ValueError, TypeError):
                         try:
-                            if (name in HBNBCommand.types and
-                                (HBNBCommand.types[name] == int or
-                                HBNBCommand.types[name] == float)):
-                                    continue
-                            if "\\\"" in value:
-                                value = value.replace("\\\"", '"')
-                                value = value[1:-1]
-                            else: 
-                                value = value.replace('"', '').replace("'", "")
-                            value = value.replace("_", " ").replace('_', ' ')
-                            new_value = str(value)
+                            new_value = value
                         except (ValueError, TypeError):
-                            continue
+                            return
                 kwargs[name] = new_value
+                i = i + 1
         new_instance = HBNBCommand.classes[args]()
         for key, value in kwargs.items():
             setattr(new_instance, key, value)

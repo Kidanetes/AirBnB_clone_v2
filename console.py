@@ -130,7 +130,10 @@ class HBNBCommand(cmd.Cmd):
             if '=' not in line[i]:
                 return;
             else:
-                name, value  = line[i].split('=')
+                try:
+                    name, value  = line[i].split('=')
+                except:
+                    return
                 if '\\' in value:
                     value = value.replace('\\', '').replace("\\", "")
                     value = value.replace('""', '"').replace("''", "'")
@@ -147,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
                         new_value = float(value)
                     except (ValueError, TypeError):
                         try:
-                            new_value = str(value)
+                            new_value = value
                         except (ValueError, TypeError):
                             return
                 kwargs[name] = new_value

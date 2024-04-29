@@ -132,7 +132,12 @@ class HBNBCommand(cmd.Cmd):
                 return;
             else:
                 name, value  = line[i].split('=')
-                value = value.replace('"', '').replace("'", "")
+                print(name)
+                print(value)
+                value = value.replace('\\', '').replace("\\", "")
+                value = value.replace('""', '"').replace("''", "'")
+                
+                print(value)
                 try:
                     new_value = int(value)
                 except (ValueError, TypeError):

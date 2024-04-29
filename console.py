@@ -137,9 +137,13 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     value = value.replace('"', '').replace("", "")
                 try:
+                    if 'id' in '{}'.format(name):
+                        raise ValueError
                     new_value = int(value)
                 except (ValueError, TypeError):
                     try:
+                        if 'id' in '{}'.format(name):
+                            raise ValueError
                         new_value = float(value)
                     except (ValueError, TypeError):
                         try:

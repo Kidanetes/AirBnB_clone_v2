@@ -121,7 +121,6 @@ class HBNBCommand(cmd.Cmd):
             return
         line = line.split(' ')
         args = line[0]
-        print(args)
         if not args in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
@@ -132,14 +131,11 @@ class HBNBCommand(cmd.Cmd):
                 return;
             else:
                 name, value  = line[i].split('=')
-                print(name)
-                print(value)
                 if '\\' in value:
                     value = value.replace('\\', '').replace("\\", "")
                     value = value.replace('""', '"').replace("''", "'")
                 else:
                     value = value.replace('"', '').replace("", "")
-                print(value)
                 try:
                     new_value = int(value)
                 except (ValueError, TypeError):

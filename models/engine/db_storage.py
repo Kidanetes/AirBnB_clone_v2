@@ -66,7 +66,7 @@ class DBStorage:
 
     def reload(self):
         """create all defined tables and creates a session"""
-        self.__session = Base.metadata.create_all(self.__engine)
+        Base.metadata.create_all(self.__engine)
         a = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(a)
         self.__session = Session()

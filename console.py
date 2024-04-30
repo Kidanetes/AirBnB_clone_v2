@@ -30,6 +30,7 @@ class HBNBCommand(cmd.Cmd):
              'latitude': float, 'longitude': float
             }
     orginals = ['id', 'created_at', 'updated_at']
+
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
@@ -121,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         if args == '':
             print("** class name missing **")
             return
-        if not args in HBNBCommand.classes:
+        if args not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
         i = 1
@@ -131,33 +132,33 @@ class HBNBCommand(cmd.Cmd):
                 i += 1
                 continue
             else:
-                name, value  = line[i].split('=')
+                name, value = line[i].split('=')
                 i = i + 1
                 if name == '' or value == '':
                     continue
                 if name in HBNBCommand.orginals:
                     continue
                 try:
-                    if (name in HBNBCommand.types and
-                        HBNBCommand.types[name] != int):
+                    if (name in HBNBCommand.types and HBNBCommand.
+                       types[name] != int):
                         raise ValueError
                     new_value = int(value)
                 except (ValueError, TypeError):
                     try:
                         if (name in HBNBCommand.types and
-                            HBNBCommand.types[name] != float):
-                            raise ValueError    
+                           HBNBCommand.types[name] != float):
+                            raise ValueError
                         new_value = float(value)
                     except (ValueError, TypeError):
                         try:
-                            if (name in HBNBCommand.types and
-                                (HBNBCommand.types[name] == int or
-                                HBNBCommand.types[name] == float)):
-                                    continue
+                            if (name in HBNBCommand.types and (HBNBCommand.
+                               types[name] == int or
+                               HBNBCommand.types[name] == float)):
+                                continue
                             if "\\\"" in value:
                                 value = value.replace("\\\"", '"')
                                 value = value[1:-1]
-                            else: 
+                            else:
                                 value = value.replace('"', '').replace("'", "")
                             value = value.replace("_", " ").replace('_', ' ')
                             new_value = str(value)
@@ -169,7 +170,6 @@ class HBNBCommand(cmd.Cmd):
             setattr(new_instance, key, value)
         storage.save()
         print(new_instance.id)
-        
 
     def help_create(self):
         """ Help information for the create method """
@@ -364,6 +364,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

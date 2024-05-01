@@ -68,6 +68,6 @@ class Place(BaseModel, Base):
             return amenities_list
 
         @amenities.setter
-        def amenities(selfi, obj):
+        def amenities(self, obj):
             if type(obj) == Amenity:
                 self.amenity_ids.append(obj.id)

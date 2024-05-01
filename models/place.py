@@ -8,7 +8,7 @@ from models.review import Review
 from models.amenity import Amenity
 
 
-association_table = Table('place_amenity', Base.metadata,
+place_amenity = Table('place_amenity', Base.metadata,
                           Column("place_id", String(60),
                                  ForeignKey("places.id"),
                                  nullable=False, primary_key=True),
@@ -62,7 +62,7 @@ class Place(BaseModel, Base):
             """return all amenities linked to place"""
             amenities_list = []
             objs = storage.all(Amenity).values()
-            for i in list(objs):
+            for i in objs:
                 if i.id in self.amenity_ids:
                     amenities_list.append(i)
             return amenities_list

@@ -62,7 +62,7 @@ class Place(BaseModel, Base):
             """return all amenities linked to place"""
             amenities_list = []
             objs = storage.all(Amenity).values()
-            for i in objs:
+            for i in list(objs):
                 if i.id in self.amenity_ids:
                     amenities_list.append(i)
             return amenities_list

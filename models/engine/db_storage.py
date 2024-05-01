@@ -14,6 +14,7 @@ from models.amenity import Amenity
 from models.review import Review
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
 class DBStorage:
     """DBStorage class contains a database storage for
     AirBnB console
@@ -30,7 +31,7 @@ class DBStorage:
         self.__engine = (create_engine('mysql+mysqldb://{}:{}@{}/{}'
                          .format(user, passwd, host, db1),
                          pool_pre_ping=True))
-        if getenv("HBNB_ENV", "none") == "test":
+        if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -42,12 +43,16 @@ class DBStorage:
             objs = self.__session.query(cls)
             for i in objs:
                 key = f"{i.__class__.__name__}.{i.id}"
+                if '_sa_instance_state' in i.__dict__:
+                    del i.__dict__['_sa_instance_state']
                 dict1[key] = i
         else:
-            for j in [State, City]:
+            for j in [State, City, User, Place]:
                 objs = self.__session.query(j)
                 for i in objs:
                     key = f"{i.__class__.__name__}.{i.id}"
+                    if '_sa_instance_state' in i.__dict__:
+                        del i.__dict__['_sa_instance_state']
                     dict1[key] = i
         return dict1
 

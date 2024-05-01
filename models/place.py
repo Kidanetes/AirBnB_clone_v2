@@ -3,21 +3,25 @@
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
+from models.review import Review
+
 
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
     if getenv('HBNB_TYPE_STORAGE') == 'db':
-            city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
-            user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-            name = Column(String(128), nullable=False)
-            description = Column(String(1024))
-            number_rooms = Column(Integer, nullable=False, default=0)
-            number_bathrooms = Column(Integer, nullable=False, default=0)
-            max_guest = Column(Integer, nullable=False, default=0)
-            price_by_night = Column(Integer, nullable=False, default=0)
-            latitude = Column(Float)
-            longitude = Column(Float)
+        city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        name = Column(String(128), nullable=False)
+        description = Column(String(1024))
+        number_rooms = Column(Integer, nullable=False, default=0)
+        number_bathrooms = Column(Integer, nullable=False, default=0)
+        max_guest = Column(Integer, nullable=False, default=0)
+        price_by_night = Column(Integer, nullable=False, default=0)
+        latitude = Column(Float)
+        longitude = Column(Float)
+        reviews = relationship("Review", backref="place")
     else:
         city_id = ""
         user_id = ""
@@ -30,3 +34,13 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+        @property
+        def reviews(self):
+            """return reviews of a place"""
+            from models import storage
+            reviews_list = []
+            objs = storage.all(Review).values()
+            for i in objs:
+                if self.id == i.place_id:
+                    reviews_list.append(i)
+            return reviews_list

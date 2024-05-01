@@ -47,7 +47,7 @@ class DBStorage:
                     del i.__dict__['_sa_instance_state']
                 dict1[key] = i
         else:
-            for j in [State, City, User, Place]:
+            for j in [State, City, User, Place, Review]:
                 objs = self.__session.query(j)
                 for i in objs:
                     key = f"{i.__class__.__name__}.{i.id}"

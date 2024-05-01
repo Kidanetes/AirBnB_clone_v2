@@ -7,14 +7,15 @@ from sqlalchemy.orm import relationship
 from models.review import Review
 from models.amenity import Amenity
 
-
-place_amenity = Table('place_amenity', Base.metadata,
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    place_amenity = Table('place_amenity', Base.metadata,
                           Column("place_id", String(60),
                                  ForeignKey("places.id"),
                                  nullable=False, primary_key=True),
                           Column("amenity_id", String(60),
                                  ForeignKey("amenities.id"),
-                                 nullable=False, primary_key=True))
+                                 nullable=False, primary_key=True)
+                          )
 
 
 class Place(BaseModel, Base):

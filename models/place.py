@@ -47,6 +47,7 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+
         @property
         def reviews(self):
             """return reviews of a place"""
@@ -70,5 +71,5 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj):
-            if type(obj) == Amenity:
+            if type(obj) is Amenity:
                 self.amenity_ids.append(obj.id)

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 """using fabric to compress all files in
 webstatic directory"""
 

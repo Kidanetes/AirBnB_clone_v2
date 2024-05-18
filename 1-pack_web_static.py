@@ -15,7 +15,7 @@ def do_pack():
     try:
         local("mkdir -p  versions")
         path = f"versions/web_static_{x}.tgz"
-        local(f"tar -cvf {path} web_static")
+        local(f"tar -cvzf {path} web_static")
         return path
     except Exception:
         return None

@@ -1,40 +1,33 @@
 #!/usr/bin/python3
-""" Function that compress a folder """
-from datetime import datetime
-from fabric.api import *
-import shlex
-import os
+"""using fabric to compress all files in
+webstatic directory"""
 
+
+from fabric.api import *
+from os.path import exists
 
 env.hosts = ['52.86.189.212', '52.201.146.212']
-#env.user = "ubuntu"
 
 
 def do_deploy(archive_path):
-    """ Deploys """
-    if not os.path.exists(archive_path):
+    """deploy our compressed web_static to the
+    my servers"""
+    if not exists(archive_path):
         return False
     try:
-        name = archive_path.replace('/', ' ')
-        name = shlex.split(name)
-        name = name[-1]
-
-        wname = name.replace('.', ' ')
-        wname = shlex.split(wname)
-        wname = wname[0]
-
-        releases_path = "/data/web_static/releases/{}/".format(wname)
-        tmp_path = "/tmp/{}".format(name)
-
         put(archive_path, "/tmp/")
-        run("mkdir -p {}".format(releases_path))
-        run("tar -xzf {} -C {}".format(tmp_path, releases_path))
-        run("rm {}".format(tmp_path))
-        run("mv {}web_static/* {}".format(releases_path, releases_path))
-        run("rm -rf {}web_static".format(releases_path))
+        archive_name = archive_path.split("/")[-1].split(".")[0]
+        unarchive_name = archive_path.split("/")[-1]
+        run(f"mkdir -p /data/web_static/releases/{archive_name}")
+        run(f"tar -xzf  /tmp/{unarchive_name} -C \
+              /data/web_static/releases/{archive_name}/")
+        run(f"rm /tmp/{unarchive_name}")
+        run(f"mv  /data/web_static/releases/{archive_name}/web_static/* \
+             /data/web_static/releases/{archive_name}")
+        run(f"rm -rf /data/web_static/releases/{archive_name}/web_static")
         run("rm -rf /data/web_static/current")
-        run("ln -s {} /data/web_static/current".format(releases_path))
-        print("New version deployed!")
+        run(f"ln -s /data/web_static/releases/{archive_name} \
+             /data/web_static/current")
         return True
-    except:
+    except Exception:
         return False

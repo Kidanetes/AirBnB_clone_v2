@@ -24,6 +24,7 @@ def do_deploy(archive_path):
         run(f"rm /tmp/{unarchive_name}")
         run(f"mv  /data/web_static/releases/{archive_name}/web_static/* \
              /data/web_static/releases/{archive_name}")
+        run(f"rm -r /data/web_static/releases/{archive_name}/web_static")
         run("rm -rf /data/web_static/current")
         run(f"ln -s /data/web_static/releases/{archive_name} \
              /data/web_static/current")

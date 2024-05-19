@@ -5,6 +5,7 @@ deploy them to the servers"""
 
 from datetime import datetime
 from fabric.api import *
+from os.path import exists
 
 
 env.hosts = ['52.86.189.212', '52.201.146.212']

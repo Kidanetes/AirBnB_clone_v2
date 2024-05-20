@@ -15,8 +15,9 @@ def deploy():
     """
     deploy the webstatic directory to the servers
     """
-    x = do_pack()
-    if x is None:
+    x = []
+    x.append(do_pack())
+    if x[0] is None:
         return False
     return do_deploy(x)
 

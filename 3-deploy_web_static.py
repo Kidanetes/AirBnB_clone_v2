@@ -10,12 +10,11 @@ from os.path import exists
 
 env.hosts = ['52.86.189.212', '52.201.146.212']
 
-
+x = do_pack()
 def deploy():
     """
     deploy the webstatic directory to the servers
     """
-    x = do_pack()
     if x is None:
         return False
     return do_deploy(x)

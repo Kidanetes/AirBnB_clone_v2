@@ -27,6 +27,7 @@ def hbnb():
 def c(text):
     """this function returns c + <text> when we
     route /c/<text>"""
+    text = text.replace("_", " ")
     return f"c {text}"
 
 

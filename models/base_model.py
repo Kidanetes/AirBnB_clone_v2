@@ -43,10 +43,9 @@ class BaseModel:
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         dict1 = self.__dict__.copy()
-        if '_sa_instance_state' in dict1.keys():          #new
-                        del dict1['_sa_instance_state']   #new
-
-        return '[{}] ({}) {}'.format(cls, self.id, dict1)  #dict = self.__dict__
+        if '_sa_instance_state' in dict1.keys():
+            del dict1['_sa_instance_state']
+        return '[{}] ({}) {}'.format(cls, self.id, dict1)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
@@ -65,7 +64,6 @@ class BaseModel:
         dictionary['updated_at'] = self.updated_at.isoformat()
         if '_sa_instance_state' in dictionary.keys():
             del dictionary['_sa_instance_state']
-            #del self.__dict__['_sa_instance_state']
         return dictionary
 
     def delete(self):

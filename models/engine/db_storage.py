@@ -43,16 +43,12 @@ class DBStorage:
             objs = self.__session.query(cls)
             for i in objs:
                 key = f"{i.__class__.__name__}.{i.id}"
-                #if '_sa_instance_state' in i.__dict__:
-                #    del i.__dict__['_sa_instance_state']
                 dict1[key] = i
         else:
             for j in [State, City, User, Place, Review, Amenity]:
                 objs = self.__session.query(j)
                 for i in objs:
                     key = f"{i.__class__.__name__}.{i.id}"
-                    #if '_sa_instance_state' in i.__dict__:
-                    #    del i.__dict__['_sa_instance_state']
                     dict1[key] = i
         return dict1
 

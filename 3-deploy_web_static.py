@@ -8,18 +8,17 @@ from fabric.api import *
 from os.path import exists
 
 
-env.hosts = ['52.86.189.212', '52.201.146.212']
-
+env.hosts = ['54.152.218.147', '54.87.157.200']
+x = []
 
 def deploy():
     """
     deploy the webstatic directory to the servers
     """
-    x = []
     x.append(do_pack())
     if x[0] is None:
         return False
-    return do_deploy(x)
+    return do_deploy(x[0])
 
 
 def do_pack():

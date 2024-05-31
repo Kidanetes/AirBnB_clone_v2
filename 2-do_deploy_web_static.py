@@ -6,7 +6,7 @@ webstatic directory"""
 from fabric.api import *
 from os.path import exists
 
-env.hosts = ['52.86.189.212', '52.201.146.212']
+env.hosts = ['54.152.218.147', '54.87.157.200']
 
 
 def do_deploy(archive_path):

@@ -11,6 +11,7 @@ from os.path import exists
 env.hosts = ['54.152.218.147', '54.87.157.200']
 x = []
 
+
 def deploy():
     """
     deploy the webstatic directory to the servers

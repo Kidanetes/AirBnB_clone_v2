@@ -12,9 +12,9 @@ Base = declarative_base()
 
 class BaseModel:
     """A base class for all hbnb models"""
-    id = mapped_column(sqlalchemy.String(60), primary_key=True, nullable=False, sort_order=-3)
-    created_at = mapped_column(sqlalchemy.DateTime, default=datetime.utcnow(), nullable=False, sort_order=-2)
-    updated_at = mapped_column(sqlalchemy.DateTime, default=datetime.utcnow(), nullable=False, sort_order=-1)
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""

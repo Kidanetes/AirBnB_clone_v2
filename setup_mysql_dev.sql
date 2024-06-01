@@ -1,5 +1,5 @@
 -- creating a user hbnb_dev
-CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'Hbnb_dev_pwd(123)';
+CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 -- creating a database hbnb_dev_db
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 -- granting all previleges on hbnb_dev_db to hbnb_dev

@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""this module contains two functions
+which will return list of states in the
+storage"""
+
 
 from flask import Flask
 from models import storage
@@ -7,6 +11,7 @@ from models.state import State
 
 
 app = Flask(__name__)
+
 
 @app.teardown_appcontext
 def close_request(self):
@@ -24,4 +29,4 @@ def state_list():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-    #close_request()
+    close_request()

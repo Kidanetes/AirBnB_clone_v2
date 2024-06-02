@@ -22,10 +22,9 @@ def close_request(self):
 @app.route("/states_list", strict_slashes=False)
 def state_list():
     """list every state in the storage"""
-    dict1 = storage.all(State).values()
+    dict1 = sorted(list(storage.all(State).values()), key=lambda x: x.name)
     return render_template('7-states_list.html', dict1=dict1)
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-    self.close_request()

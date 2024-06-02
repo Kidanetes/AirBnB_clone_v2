@@ -28,7 +28,9 @@ def state_list():
 
 @app.teardown_appcontext
 def close_request(self):
-        """close the session after each request"""
-            storage.close()
+    """close the session after each request"""
+    storage.close()
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

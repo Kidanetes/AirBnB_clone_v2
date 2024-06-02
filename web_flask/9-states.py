@@ -19,11 +19,21 @@ def close_request(self):
     storage.close()
 
 
-@app.route("/states_list", strict_slashes=False)
+@app.route("/states", strict_slashes=False)
 def state_list():
     """list every state in the storage"""
     l1 = storage.all(State).values()
-    return render_template('7-states_list.html', l1=l1)
+    return render_template('9-states.html', l1=l1, n=1)
+
+@app.route('/states/<id>', strict_slashes=False)
+def city_by_id(id):
+    """list all cities associated with a state"""
+    l1 = storage.all(State).values()
+    for i in l1:
+        if i.id == id:
+            return render_template('9-states.html', state=i, n=2)
+    return render_template('9-states.html', n=3)
+
 
 
 if __name__ == "__main__":

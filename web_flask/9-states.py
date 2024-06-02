@@ -25,6 +25,7 @@ def state_list():
     l1 = storage.all(State).values()
     return render_template('9-states.html', l1=l1, n=1)
 
+
 @app.route('/states/<id>', strict_slashes=False)
 def city_by_id(id):
     """list all cities associated with a state"""
@@ -33,7 +34,6 @@ def city_by_id(id):
         if i.id == id:
             return render_template('9-states.html', state=i, n=2)
     return render_template('9-states.html', n=3)
-
 
 
 if __name__ == "__main__":

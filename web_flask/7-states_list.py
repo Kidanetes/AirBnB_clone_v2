@@ -22,8 +22,8 @@ def close_request(self):
 @app.route("/states_list", strict_slashes=False)
 def state_list():
     """list every state in the storage"""
-    dict1 = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    return render_template('7-states_list.html', dict1=dict1)
+    l1 = storage.all(State).values()
+    return render_template('7-states_list.html', l1=l1)
 
 
 if __name__ == "__main__":

@@ -23,10 +23,8 @@ def close_request(self):
 def state_list():
     """list every state in the storage"""
     dict1 = storage.all(State).values()
-    
     return render_template('7-states_list.html', dict1=dict1)
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-    close_request()

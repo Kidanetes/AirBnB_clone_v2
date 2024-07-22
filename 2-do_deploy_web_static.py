@@ -18,15 +18,15 @@ def do_deploy(archive_path):
         put(archive_path, "/tmp/")
         archive_name = archive_path.split("/")[-1].split(".")[0]
         unarchive_name = archive_path.split("/")[-1]
-        run(f"sudo mkdir -p /data/web_static/releases/{archive_name}")
-        run(f"sudo tar -xzf  /tmp/{unarchive_name} -C \
+        run(f"mkdir -p /data/web_static/releases/{archive_name}")
+        run(f"tar -xzf  /tmp/{unarchive_name} -C \
               /data/web_static/releases/{archive_name}/")
-        run(f"sudo rm /tmp/{unarchive_name}")
-        run(f"sudo mv  /data/web_static/releases/{archive_name}/web_static/* \
+        run(f"rm /tmp/{unarchive_name}")
+        run(f"mv  /data/web_static/releases/{archive_name}/web_static/* \
              /data/web_static/releases/{archive_name}")
-        run(f"sudo rm -rf /data/web_static/releases/{archive_name}/web_static")
-        run("sudo rm -rf /data/web_static/current")
-        run(f"sudo ln -s /data/web_static/releases/{archive_name}/ \
+        run(f"rm -rf /data/web_static/releases/{archive_name}/web_static")
+        run("rm -rf /data/web_static/current")
+        run(f"ln -s /data/web_static/releases/{archive_name}/ \
              /data/web_static/current")
         return True
     except Exception:

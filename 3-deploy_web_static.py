@@ -8,7 +8,7 @@ from fabric.api import *
 from os.path import exists
 
 
-env.hosts = ['54.152.218.147', '54.87.157.200']
+env.hosts = ['3.85.136.6', '18.209.152.171']
 x = []
 
 

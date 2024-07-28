@@ -54,6 +54,8 @@ h4 {
         border-radius: 4px;
         padding: 20px;
         margin: 0;
+	max-height: 300px;
+	overflow: auto;
         z-index: 1;
 }
 .popover li {
